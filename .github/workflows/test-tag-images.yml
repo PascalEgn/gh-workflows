@@ -14,7 +14,7 @@ jobs:
         uses: ./.github/actions/tag-images
         with:
             images: |
-                registry.cern.ch/cern-sis/inspire/renderer@sha256:10d4928f0c9116da5fba6fd71a943395f1bf8268c59ae02ceaebcdb5ebffd951
+                registry.cern.ch/cern-sis/inspire/renderer:sha-4086709
                 registry.cern.ch/cern-sis/langfuse:v3.64.0
             tag: qa
             registry: registry.cern.ch
