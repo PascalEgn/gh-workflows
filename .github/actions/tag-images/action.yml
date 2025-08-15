@@ -36,7 +36,9 @@ runs:
         echo "${{ inputs.images }}" | while IFS= read -r image; do
           [[ -z "$image" ]] && continue
           image=$(echo "$image" | xargs)
-          if [[ $image =~ ^(.+)[@:].*$ ]]; then
+          if [[ $image =~ ^(.+)@sha256:.*$ ]]; then
+            base_image="${BASH_REMATCH[1]}"
+          elif [[ $image =~ ^(.+):.*$ ]]; then
             base_image="${BASH_REMATCH[1]}"
           else
             base_image="$image"
