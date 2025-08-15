@@ -43,14 +43,17 @@ runs:
           else
             base_image="$image"
           fi
-          echo "Tagging $image as $base_image:$TAG"
+
+          echo "Creating manifest for $image as $base_image:$TAG"
           if ! docker pull "$image"; then
             echo "Error: Failed to pull $image"
             exit 1
           fi
-          docker tag "$image" "$base_image:$TAG"
-          if ! docker push "$base_image:$TAG"; then
-            echo "Error: Failed to push $base_image:$TAG"
+
+          docker manifest create "$base_image:$TAG" "$image"
+
+          if ! docker manifest push "$base_image:$TAG"; then
+            echo "Error: Failed to push manifest $base_image:$TAG"
             exit 1
           fi
           
