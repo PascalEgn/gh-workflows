@@ -21,7 +21,6 @@ jobs:
         with:
           images: |
             registry.cern.ch/cern-sis/inspire/workflows@sha256:f9772e240944ec1668e2f9d6315dbb02e42fa0276d4b3482bf6795fc01673b27
-            registry.cern.ch/cern-sis/inspire/workflows:sha-a1e8c97
           tag: ${{ inputs.tag }}
           registry: registry.cern.ch
           registry-username: ${{ secrets.REGISTRY_USERNAME }}
