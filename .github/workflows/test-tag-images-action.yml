@@ -1,0 +1,28 @@
+name: Test Tag Images Action
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to apply'
+        required: true
+        type: string
+        default: 'test'
+
+jobs:
+  test-tag-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Test tag images action
+        uses: ./.github/actions/tag-images
+        with:
+          images: |
+            registry.cern.ch/cern-sis/inspire/workflows@sha256:f9772e240944ec1668e2f9d6315dbb02e42fa0276d4b3482bf6795fc01673b27
+            registry.cern.ch/cern-sis/inspire/workflows:sha-a1e8c97
+          tag: ${{ inputs.tag }}
+          registry: registry.cern.ch
+          registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
